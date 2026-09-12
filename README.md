@@ -5,10 +5,15 @@ rename it, and start writing.
 
 ## Setup
 
-1. Download the API jars from the
-   [script-api releases](https://github.com/iEasyScript/script-api/releases)
-   and put them in `libs/`.
-2. Build and install:
+1. Download or clone this repository.
+2. Open the folder in IntelliJ IDEA (File → Open) and let the Gradle sync finish.
+
+That's it. The build downloads the script API itself, so there are no jars to
+fetch by hand, and a JDK 25 is downloaded for the build if you do not have one.
+The API version lives in `gradle.properties`; bump it when the engine updates and
+reload the Gradle project.
+
+Build and install:
 
 ```bash
 ./gradlew installScripts
@@ -16,7 +21,8 @@ rename it, and start writing.
 
 That copies the jar to `~/.projectx/scripts/`, where the engine loads it.
 
-You need JDK 25.
+If the editor shows `Cannot resolve symbol` on `com.projectx` imports, the Gradle
+sync has not finished or failed: open the Gradle tool window and press Reload.
 
 ## What's here
 

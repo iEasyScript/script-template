@@ -20,11 +20,16 @@ You need JDK 25.
 
 ## What's here
 
-`src/main/kotlin/com/example/script/ExampleWoodcutter.kt` is a complete, working
-script in about 45 lines. It shows the annotation the engine discovers scripts
-by, outcome-gated waiting, randomised delays, and a user-facing config item.
+Two complete, working scripts that do the same job in different languages:
 
-Rename the package and the class, and you have your own script.
+- `src/main/kotlin/com/example/script/ExampleWoodcutter.kt`
+- `src/main/java/com/example/script/ExampleJavaWoodcutter.java`
+
+Both show the annotation the engine discovers scripts by, outcome-gated waiting
+and randomised delays. The Kotlin one also has a user-facing config item.
+
+Delete whichever language you do not want, rename the package and class, and you
+have your own script. Both can also coexist in one jar.
 
 ## Next
 

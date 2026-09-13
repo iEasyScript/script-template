@@ -6,6 +6,10 @@ import com.projectx.script.Script
 import com.projectx.script.ScriptDescription
 import com.projectx.script.api.interactClosestObject
 import com.projectx.script.api.inventory
+import com.projectx.ui.backend.dsl.ImGuiDsl
+import com.projectx.ui.backend.dsl.scopes.text
+import com.projectx.ui.backend.dsl.scopes.xpProgressBar
+import org.projectx.core.game.skill.Skill
 
 @ScriptDescription(
     name = "Example Woodcutter",
@@ -21,21 +25,23 @@ class ExampleWoodcutter : Script(), ConfigurableScript {
         initialValue = true,
     )
 
+    private var logsChopped = 0
+
     override fun onStart() {
         println("Example Woodcutter started")
     }
 
     override suspend fun loop() {
         if (inventory.isFull) {
-            if (!dropLogs.value) return
-            dropOneLog()
+            if (dropLogs.value) dropOneLog() else delay(600, 200)
             return
         }
 
         // interactClosest* returns false when nothing matched, so the script
         // idles instead of spinning at full speed.
         if (interactClosestObject("Tree", "Chop down")) {
-            waitForXPDrop()
+            waitForXPDrop(Skill.WOODCUTTING)
+            logsChopped++
             delay(240, 90)
         } else {
             delay(320, 200)
@@ -45,6 +51,13 @@ class ExampleWoodcutter : Script(), ConfigurableScript {
     private suspend fun dropOneLog() {
         val log = inventory.firstOrNull { it.name.endsWith("logs") } ?: return
         log.click("Drop")
-        delay(260, 80)
+        delayUntil(3000) { !inventory.isFull }
+    }
+
+    override fun render() {
+        ImGuiDsl.window("Example Woodcutter") {
+            text("Logs chopped: $logsChopped")
+            xpProgressBar(Skill.WOODCUTTING)
+        }
     }
 }

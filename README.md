@@ -37,8 +37,10 @@ Two complete, working scripts that do the same job in different languages:
 - `src/main/kotlin/com/example/script/ExampleWoodcutter.kt`
 - `src/main/java/com/example/script/ExampleJavaWoodcutter.java`
 
-Both show the annotation the engine discovers scripts by, outcome-gated waiting
-and randomised delays. The Kotlin one also has a user-facing config item.
+Both show the annotation the engine discovers scripts by, outcome-gated waiting,
+randomised delays, a setting the user can change and a small overlay window. They
+are line-for-line equivalents, so you can see how each part is written in the
+other language.
 
 Delete whichever language you do not want, rename the package and class, and you
 have your own script. Both can also coexist in one jar.
